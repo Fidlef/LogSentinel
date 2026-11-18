@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="LogSentinel is a local, explainable synthetic log-analysis dashboard.">
+  <title>LogSentinel — Local security analytics</title>
+  <link rel="stylesheet" href="styles.css"><link rel="icon" href="icon.svg" type="image/svg+xml">
+</head>
+<body>
+  <a class="skip" href="#dashboard">Skip to dashboard</a>
+  <header><a class="brand" href="./"><span>LS</span> LogSentinel</a><p><i></i> LOCAL ANALYTICS</p></header>
+  <main id="dashboard">
+    <section class="hero">
+      <div><p class="eyebrow">DEFENSIVE EVENT TRIAGE</p><h1>Turn noisy login events into <em>explainable signals.</em></h1><p>Import JSON or CSV in your browser, review transparent detection rules, and export a compact incident report. Nothing is uploaded.</p></div>
+      <aside><strong>Designed for safe demonstrations</strong><p>The bundled dataset uses documentation-only IP ranges and fictional accounts. Do not upload secrets or production logs to a public demo.</p></aside>
+    </section>
+    <section class="toolbar" aria-label="Data controls">
+      <div><span class="step">01</span><div><strong>Choose data</strong><small>JSON or CSV · up to 2 MB / 10,000 events</small></div></div>
+      <button id="load-demo">Load synthetic dataset</button>
+      <label class="file">Import local file<input id="file-input" type="file" accept=".json,.csv,application/json,text/csv"></label>
+      <button id="export" class="ghost" disabled>Export report</button>
+    </section>
+    <p id="status" class="status" role="status">Load the synthetic dataset to begin. Analysis happens only in this tab.</p>
+    <section class="metrics" aria-label="Analysis summary">
+      <article><span>EVENTS</span><strong id="event-count">—</strong><small>normalized records</small></article>
+      <article><span>INCIDENTS</span><strong id="incident-count">—</strong><small>rule-based findings</small></article>
+      <article><span>SOURCES</span><strong id="source-count">—</strong><small>unique IP labels</small></article>
+      <article class="warn"><span>FAILURES</span><strong id="failure-count">—</strong><small>authentication events</small></article>
+    </section>
+    <section class="grid">
+      <article class="panel activity">
+        <div class="panel-head"><div><p class="eyebrow">EVENT MIX</p><h2>Authentication outcomes</h2></div><span>FACTS</span></div>
+        <div class="bar-row"><label id="success-label">0 success</label><div><i id="success-bar" class="success"></i></div></div>
+        <div class="bar-row"><label id="failure-label">0 failure</label><div><i id="failure-bar" class="failure"></i></div></div>
+        <div class="rule-note"><strong>Detection window</strong><p>Repeated failures: 5 events / 10 min<br>Password spray: 4 usernames / 15 min<br>Rapid country label change: 60 min</p></div>
+      </article>
+      <article class="panel findings">
+        <div class="panel-head"><div><p class="eyebrow">INCIDENT QUEUE</p><h2>Explainable findings</h2></div><span id="shown-count">0 shown</span></div>
+        <nav aria-label="Filter by severity"><button class="active" data-severity="all">All</button><button data-severity="critical">Critical</button><button data-severity="high">High</button><button data-severity="medium">Medium</button><button data-severity="low">Low</button></nav>
+        <div id="incidents"><p class="empty">No analysis yet.</p></div>
+      </article>
+    </section>
+    <section class="boundaries"><article><strong>OBSERVED</strong><p>Times, accounts, outcomes, services, and source labels come from the imported records.</p></article><article><strong>INFERRED</strong><p>Rules identify review patterns. They do not prove compromise, identity, location, or intent.</p></article><article><strong>NOT PERFORMED</strong><p>No enrichment, IP lookup, threat feed, account action, or remote request is made.</p></article></section>
+  </main>
+  <footer><span>LogSentinel</span><span>Local first. Evidence always.</span></footer>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
+
